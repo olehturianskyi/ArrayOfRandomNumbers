@@ -10,10 +10,10 @@ namespace ArrayOfRandomNumbers
     {
         static void Main(string[] args)
         {
-            string[] evenТumbers = new string[1];
-            string[] oddТumbers = new string[1];
+            string[] evenТumbers = new string[0];
+            string[] oddТumbers = new string[0];
             string intermediate;
-            int i1 = 0, i2 = 0;
+           // int i1 = 0, i2 = 0;
 
             int[] originalArray = CreatingOriginalArray();
             Console.Write("Source array:  ");
@@ -26,16 +26,16 @@ namespace ArrayOfRandomNumbers
                                 
                 if (originalArray[i] % 2 == 0) 
                 {
-                    Array.Resize(ref evenТumbers, i1++);
-                    evenТumbers[i1-1] = intermediate;
+                    Array.Resize(ref evenТumbers, evenТumbers.Length + 1);
+                    evenТumbers[evenТumbers.Length - 1] = intermediate;
                     //i1++;
                     //evenТumbers = AddEvenТumbers(evenТumbers, intermediate);
                 } else                
                 {
-                    Array.Resize(ref oddТumbers, i2++);
-                    oddТumbers[i2-1] = intermediate;
+                    Array.Resize(ref oddТumbers, oddТumbers.Length + 1);
+                    evenТumbers[oddТumbers.Length - 1] = intermediate;
                     //i2++;
-                    
+
                 }
             }
             Console.WriteLine();
