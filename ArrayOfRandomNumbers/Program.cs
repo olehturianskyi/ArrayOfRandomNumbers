@@ -12,14 +12,20 @@ namespace ArrayOfRandomNumbers
         {
             string[] evenТumbers;
             string[] oddТumbers;
-            
+            //string[] evenLetters;
+            string[] oddLetters;
+            string[] alphabet = new string[26] {"a","b","c","d","e","f","g","h","i","j","k","l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
+
             int[] originalArray = CreateOriginalArray();
             Console.Write("Source array:  ");
             foreach (int el in originalArray)
                 Console.Write(" "+el);
+            Console.WriteLine();
             evenТumbers = CreateIntermedArrayEven(originalArray); 
             oddТumbers = CreateIntermedArrayOdd(originalArray);
-           
+            Console.WriteLine();
+            Console.WriteLine("     Divide into odd and even");
             Console.WriteLine();
             Console.WriteLine("Array of even numbers:");
             foreach (string evenT in evenТumbers) Console.Write(evenT + " ");
@@ -27,9 +33,72 @@ namespace ArrayOfRandomNumbers
             Console.WriteLine("Array of odd numbers:");
             foreach (string oddT in oddТumbers) Console.Write(oddT + " ");
             Console.WriteLine();
+            //***********************************************************************
+            Console.WriteLine();
+            Console.WriteLine("     Replacing numbers with letters");
+            Console.WriteLine();
+
+            int amountEven = ReplaceEvenNumbersWithLetters(evenТumbers, alphabet);             
+            int amountOdd = ReplaceOddNumbersWithLetters(oddТumbers, alphabet);
+            Console.WriteLine();
+            Console.WriteLine("The array of even numbers has {0} uppercase letters, and the array of odd numbers has {1} uppercase letters", amountEven, amountOdd);
+            Console.WriteLine();
+            if (amountEven > amountOdd)
+            {
+                Console.WriteLine("Larger uppercase literal in array of even numbers");
+            } else Console.WriteLine("Larger uppercase literal in array of odd numbers");
+
+
 
             Console.ReadKey();
         }
+        
+        public static int ReplaceOddNumbersWithLetters(string[] oddTumbers, string[] alphabet)
+        {
+            int amount = 0;
+            string[] result = new string[oddTumbers.Length];
+            for (int i = 0; i < oddTumbers.Length; i++)
+            {
+                int number = Convert.ToInt32(oddTumbers[i]);
+                result[i] = alphabet[number - 1];
+                if (result[i] == "a" || result[i] == "e" || result[i] == "i" || result[i] == "d" || result[i] == "h" || result[i] == "h")
+                {
+                    result[i] = (result[i].ToUpper());
+                    amount++;
+                }
+            }
+            Console.WriteLine("Array of odd numbers:");
+            foreach (string oddL in result)
+            {
+                Console.Write(oddL + " ");
+            }
+            Console.WriteLine();
+            return amount;
+        }
+        public static int ReplaceEvenNumbersWithLetters(string[] evenTumbers, string[] alphabet)
+        {
+            int amount=0;
+            string[] result = new string[evenTumbers.Length]; 
+            for (int i = 0; i < evenTumbers.Length; i++)
+            {
+                int number = Convert.ToInt32(evenTumbers[i]);
+                result[i] = alphabet[number - 1];
+                if (result[i] == "a" || result[i] == "e" || result[i] == "i" || result[i] == "d" || result[i] == "h" || result[i] == "h")
+                {
+                    result[i] = (result[i].ToUpper());
+                    amount++;
+                }
+                
+            }
+            Console.WriteLine("Array of even numbers:");
+            foreach (string evenL in result)
+            {
+                Console.Write(evenL + " ");
+            }
+            Console.WriteLine();
+            return amount;
+        }
+
         public static string[] CreateIntermedArrayOdd(int[] originalArray)
         {
             string[] IntermedArrayOddТumbers = new string[0];
