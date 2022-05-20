@@ -11,12 +11,8 @@ namespace ArrayOfRandomNumbers
         static void Main(string[] args)
         {
             string[] evenТumbers;
-            string[] oddТumbers;
-            //string[] evenLetters;
-            string[] oddLetters;
+            string[] oddТumbers;           
             string[] alphabet = new string[26] {"a","b","c","d","e","f","g","h","i","j","k","l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-
-
             int[] originalArray = CreateOriginalArray();
             Console.Write("Source array:  ");
             foreach (int el in originalArray)
@@ -27,29 +23,34 @@ namespace ArrayOfRandomNumbers
             Console.WriteLine();
             Console.WriteLine("     Divide into odd and even");
             Console.WriteLine();
+
             Console.WriteLine("Array of even numbers:");
             foreach (string evenT in evenТumbers) Console.Write(evenT + " ");
             Console.WriteLine();
+
             Console.WriteLine("Array of odd numbers:");
             foreach (string oddT in oddТumbers) Console.Write(oddT + " ");
-            Console.WriteLine();
-            //***********************************************************************
-            Console.WriteLine();
+            Console.WriteLine(); Console.WriteLine();
+
             Console.WriteLine("     Replacing numbers with letters");
             Console.WriteLine();
 
             int amountEven = ReplaceEvenNumbersWithLetters(evenТumbers, alphabet);             
             int amountOdd = ReplaceOddNumbersWithLetters(oddТumbers, alphabet);
+
             Console.WriteLine();
             Console.WriteLine("The array of even numbers has {0} uppercase letters, and the array of odd numbers has {1} uppercase letters", amountEven, amountOdd);
             Console.WriteLine();
             if (amountEven > amountOdd)
             {
                 Console.WriteLine("Larger uppercase literal in array of even numbers");
-            } else Console.WriteLine("Larger uppercase literal in array of odd numbers");
-
-
-
+            } else
+            if (amountEven < amountOdd)
+            {
+                Console.WriteLine("Larger uppercase literal in array of odd numbers");
+            }
+                
+              else Console.WriteLine("Both arrays have the same number of uppercase letters");
             Console.ReadKey();
         }
         
@@ -87,8 +88,7 @@ namespace ArrayOfRandomNumbers
                 {
                     result[i] = (result[i].ToUpper());
                     amount++;
-                }
-                
+                }                
             }
             Console.WriteLine("Array of even numbers:");
             foreach (string evenL in result)
@@ -98,14 +98,12 @@ namespace ArrayOfRandomNumbers
             Console.WriteLine();
             return amount;
         }
-
         public static string[] CreateIntermedArrayOdd(int[] originalArray)
         {
             string[] IntermedArrayOddТumbers = new string[0];
             for (int i = 0; i < originalArray.Length; i++)
             {
                 string intermediate = Convert.ToString(originalArray[i]);
-
                 if (originalArray[i] % 2 == 1)
                 {
                     Array.Resize(ref IntermedArrayOddТumbers, IntermedArrayOddТumbers.Length + 1);
@@ -114,7 +112,6 @@ namespace ArrayOfRandomNumbers
             }
             return IntermedArrayOddТumbers;
         }
-
         public static string[] CreateIntermedArrayEven(int[] originalArray)
          {
             string[] IntermedArrayEvenТumbers = new string[0];           
@@ -142,7 +139,6 @@ namespace ArrayOfRandomNumbers
                 numbers[i] = rnd.Next(1,26);
             }
             return numbers;
-        }
-        
+        }        
     }
 }
