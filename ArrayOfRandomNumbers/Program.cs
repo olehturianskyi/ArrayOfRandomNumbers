@@ -10,34 +10,16 @@ namespace ArrayOfRandomNumbers
     {
         static void Main(string[] args)
         {
-            string[] evenТumbers = new string[0];
-            string[] oddТumbers = new string[0];
-            string intermediate;
-           // int i1 = 0, i2 = 0;
-
-            int[] originalArray = CreatingOriginalArray();
+            string[] evenТumbers;
+            string[] oddТumbers;
+            
+            int[] originalArray = CreateOriginalArray();
             Console.Write("Source array:  ");
             foreach (int el in originalArray)
                 Console.Write(" "+el);
-
-            for (int i=0; i<originalArray.Length; i++)
-            {
-                intermediate = Convert.ToString(originalArray[i]);
-                                
-                if (originalArray[i] % 2 == 0) 
-                {
-                    Array.Resize(ref evenТumbers, evenТumbers.Length + 1);
-                    evenТumbers[evenТumbers.Length - 1] = intermediate;
-                    //i1++;
-                    //evenТumbers = AddEvenТumbers(evenТumbers, intermediate);
-                } else                
-                {
-                    Array.Resize(ref oddТumbers, oddТumbers.Length + 1);
-                    evenТumbers[oddТumbers.Length - 1] = intermediate;
-                    //i2++;
-
-                }
-            }
+            evenТumbers = CreateIntermedArrayEven(originalArray); 
+            oddТumbers = CreateIntermedArrayOdd(originalArray);
+           
             Console.WriteLine();
             Console.WriteLine("Array of even numbers:");
             foreach (string evenT in evenТumbers) Console.Write(evenT + " ");
@@ -46,21 +28,40 @@ namespace ArrayOfRandomNumbers
             foreach (string oddT in oddТumbers) Console.Write(oddT + " ");
             Console.WriteLine();
 
-
             Console.ReadKey();
         }
-       /*
-        public static string[] AddEvenТumbers(string[] evenTumbers, string intermediate)
+        public static string[] CreateIntermedArrayOdd(int[] originalArray)
         {
-            int i = evenTumbers.Length+1;
-            Array.Resize(ref evenTumbers, i);
-            
-            evenTumbers[i] = intermediate;
-            
-            
-            return evenTumbers;
-        }*/
-        public static int[] CreatingOriginalArray()
+            string[] IntermedArrayOddТumbers = new string[0];
+            for (int i = 0; i < originalArray.Length; i++)
+            {
+                string intermediate = Convert.ToString(originalArray[i]);
+
+                if (originalArray[i] % 2 == 1)
+                {
+                    Array.Resize(ref IntermedArrayOddТumbers, IntermedArrayOddТumbers.Length + 1);
+                    IntermedArrayOddТumbers[IntermedArrayOddТumbers.Length - 1] = intermediate;
+                }
+            }
+            return IntermedArrayOddТumbers;
+        }
+
+        public static string[] CreateIntermedArrayEven(int[] originalArray)
+         {
+            string[] IntermedArrayEvenТumbers = new string[0];           
+            for (int i = 0; i < originalArray.Length; i++)
+            {
+                string intermediate = Convert.ToString(originalArray[i]);
+
+                if (originalArray[i] % 2 == 0)
+                {
+                    Array.Resize(ref IntermedArrayEvenТumbers, IntermedArrayEvenТumbers.Length + 1);
+                    IntermedArrayEvenТumbers[IntermedArrayEvenТumbers.Length - 1] = intermediate;                    
+                }
+            }
+            return IntermedArrayEvenТumbers;
+         }
+        public static int[] CreateOriginalArray()
         {
             int i;
             Console.Write("Enter the size of the array (for correct display, preferably no more than 30): ");
